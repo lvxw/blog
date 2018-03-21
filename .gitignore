@@ -11,3 +11,5 @@
 */.classpath
 *.iml
 node_modules
+db
+
