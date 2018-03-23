@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{%block main%}
+<ol class="breadcrumb">
+    <li><a href="/admin/category">分类首页</a></li>
+    <li><span>修改分类 - {{category.name}}</span></li>
+</ol>
+
+<h3>修改分类</h3>
+<form action="/admin/category/edit?id={{category.id}}" method="post">
+    <div class="form-group">
+        <label for="name">分类名称：</label>
+        <input type="text" value="{{category.name}}" class="form-control" id="exampleInputEmail1" placeholder="请输入分类名称" name="name">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+{%endblock%}

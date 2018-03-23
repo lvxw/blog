@@ -61,36 +61,45 @@ router.post('/user/register',function (req,res,next) {
     })
 })
 
+
+/**
+ * 用户登录
+ */
 router.post('/user/login',function (req,res,next) {
     var username = req.body.username;
     var password = req.body.password;
-    if(username === ''){
+    if(username === '' || password === ''){
         responseData.code = 1;
-        responseData.message = '用户名不能为空';
+        responseData.message = '用户名或密码不能为空';
         res.json(responseData);
         return;
     }
-    if(password === ''){
-        responseData.code = 2;
-        responseData.message = '密码不能为空';
-        res.json(responseData);
-        return;
-    }
-
     User.findOne({
         username:username,
         password:password
     }).then(function (userInfo) {
-        console.log(userInfo)
-       if(userInfo){
-           responseData.message="验证通过";
-           res.json(responseData);
-       }else{
-           responseData.code=4;
+       if(!userInfo){
+           responseData.code=2;
            responseData.message='用户名或密码错误'
            res.json(responseData)
+           return
        }
+        responseData.message="登录成功";
+        responseData.userInfo={
+            _id:userInfo._id,
+            username:userInfo.username
+        }
+        req.cookies.set('userInfo',JSON.stringify({
+            _id:userInfo._id,
+            username:userInfo.username
+        }))
+        res.json(responseData);
     })
+})
+
+router.get('/user/logout',function (req, res) {
+    req.cookies.set('userInfo',null)
+    res.json(responseData);
 })
 
 module.exports = router

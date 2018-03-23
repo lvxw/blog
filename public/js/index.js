@@ -1,6 +1,7 @@
 $(function () {
     var $loginBox = $('#loginBox');
     var $registerBox = $('#registerBox');
+    var $userInfo = $('#userInfo');
     $loginBox.find('a.colMint').on('click',function () {
         $registerBox.show();
         $loginBox.hide();
@@ -45,12 +46,18 @@ $(function () {
             success:function (result) {
                 $loginBox.find('.colWarning').html(result.message)
                 if(!result.code){
-                    setTimeout(function () {
-                        if($loginBox.find('[name="username"]').val() === "admin"){
-                            $('#adminBox').show()
-                        }
-                        $loginBox.hide();
-                    },1000)
+                    window.location.reload()
+                }
+            }
+        })
+    })
+    
+    $("#logout").on('click',function () {
+        $.ajax({
+            url:'api/user/logout',
+            success:function (result) {
+                if(!result.code){
+                    window.location.reload()
                 }
             }
         })
