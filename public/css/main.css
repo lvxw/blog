@@ -41,7 +41,7 @@ button {
   color: #FFF;
 }
 .bgDanger {
-  background-color: #f76447!important;
+  background-color: #f76370 !important;
   color: #FFF;
 }
 .bgPink {
@@ -71,7 +71,7 @@ button {
   color: #579ddb !important;
 }
 .colInfo {
-  color: #46b9d8 !important;
+  color: #35829c !important;
 }
 .colSuccess {
   color: #97c664 !important;
@@ -124,7 +124,7 @@ button {
   *zoom: 1;
 }
 header {
-  height: 222px;
+  height: 200px;
   position: relative;
   overflow: hidden;
 }
@@ -173,7 +173,7 @@ nav .menu a {
 }
 nav .menu a:hover, nav .menu a.focus {
   margin-bottom: -2px;
-  border-bottom: 2px solid #e67e22;
+  border-bottom: 2px solid #4feafd;
 }
 main {
   width: 1140px;
@@ -207,7 +207,7 @@ main .mainLeft .listBox .function.bortop {
 }
 main .mainLeft .listBox .function a {
   display: inline-block;
-  background: #e67e22;
+  background: #46b8de;
   text-align: center;
   width: 100px;
   height: 34px;
@@ -244,7 +244,7 @@ main .mainLeft .message .submit {
   padding: 10px;
   width: 76px;
   height: 72px;
-  background: #1F89bf;
+  background: #46b7dd;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -282,11 +282,11 @@ main .mainRight .rightBox .title span {
   margin-bottom: -1px;
   height: 36px;
   line-height: 36px;
-  border-bottom: 1px solid #e67e22;
+  border-bottom: 1px solid #46b8de;
   padding: 0px 20px 0px 0px;
 }
 main .mainRight .rightBox button {
-  background: #e67e22;
+  background: #46b8de;
   width: 100%;
   height: 34px;
   cursor: pointer;
@@ -324,7 +324,7 @@ main .mainRight .rightBox .line input {
   padding: 0px 5px;
 }
 main .mainRight .rightBox .line button {
-  background: #e67e22;
+  background: #46b8de;
   width: 222px;
   height: 34px;
   cursor: pointer;
@@ -389,7 +389,7 @@ footer .title em {
   margin-bottom: -1px;
   height: 36px;
   line-height: 36px;
-  border-bottom: 1px solid #e67e22;
+  border-bottom: 1px solid #46b8de;
   padding: 0px 20px 0px 0px;
   color: #fff;
   font-style: normal;

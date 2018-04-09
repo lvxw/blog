@@ -173,7 +173,7 @@ router.post('/category/edit',function (req, res, next) {
             if(name == category.name){
                 res.render('admin/success.html',{
                     userInfo:req.userInfo,
-                    message:'修改成功',
+                    message:'分类修改成功',
                     url:'/admin/category'
                 })
             }else{
@@ -193,7 +193,7 @@ router.post('/category/edit',function (req, res, next) {
                         }).then(function () {
                             res.render('admin/success.html',{
                                 userInfo:req.userInfo,
-                                message:'修改成功',
+                                message:'分类修改成功',
                                 url:'/admin/category'
                             })
                         })
@@ -249,7 +249,7 @@ router.get('/content',function (req, res, next) {
         page  = Math.min(page,pages)
         page  = Math.max(1,page)
         var skip = (page-1)*limit
-        Content.find().populate('category').sort({_id:-1}).limit(limit).skip(skip).then(function (contents) {
+        Content.find().populate(['category','user']).sort({addTime:-1}).limit(limit).skip(skip).then(function (contents) {
             res.render('admin/content_index.html',{
                 userInfo:req.userInfo,
                 contents:contents,
@@ -277,7 +277,7 @@ router.get('/content/add',function (req, res, next) {
 })
 
 /**
- * 添加提交
+ * 添加内容提交
  */
 
 router.post('/content/add',function (req, res, next) {
@@ -314,6 +314,7 @@ router.post('/content/add',function (req, res, next) {
             new Content({
                 category:category,
                 title:title,
+                user:req.userInfo._id.toString(),
                 description:description,
                 content:contents
             }).save().then(function () {
@@ -362,7 +363,7 @@ router.get('/content/edit',function (req, res, next) {
     var id = req.query.id || ""
     Content.findOne({
         _id:id
-    }).then(function (content) {
+    }).populate('category').then(function (content) {
         if(!content){
             res.render('admin/error.html',{
                 userInfo:req.userInfo,
@@ -370,12 +371,47 @@ router.get('/content/edit',function (req, res, next) {
             })
         }else{
             Category.find().sort({_id:-1}).then(function (categories) {
-                console.log(categories)
-                console.log(content)
                 res.render('admin/content_edit.html',{
                     userInfo:req.userInfo,
                     content:content,
                     categories:categories
+                })
+            })
+        }
+    })
+})
+
+/**
+ * 内容编辑提交
+ */
+router.post('/content/edit',function (req, res, next) {
+    var id = req.query.id || ""
+    var category = req.body.category
+    var title = req.body.title
+    var description = req.body.description
+    var contents = req.body.content
+
+    Content.findOne({
+        _id:id
+    }).then(function (content) {
+        if(!content){
+            res.render('admin/error.html',{
+                userInfo:req.userInfo,
+                message:'内容不存在'
+            })
+        }else{
+            Content.update({
+                _id:id
+            },{
+                category:category,
+                title:title,
+                description:description,
+                content:contents
+            }).then(function () {
+                res.render('admin/success.html',{
+                    userInfo:req.userInfo,
+                    message:'内容修改成功',
+                    url:'/admin/content'
                 })
             })
         }

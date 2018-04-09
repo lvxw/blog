@@ -12,7 +12,7 @@
         <label for="class">分类：</label>
         <select name="category" id="category" class="form-control">
             {%for category in categories%}
-            {% if content.category == category.id %}
+            {% if content.category.id == category.id %}
             <option value="{{category.id}}" selected>{{category.name}}</option>
             {% else %}
             <option value="{{category.id}}">{{category.name}}</option>
